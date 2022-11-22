@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 
 namespace CodeBlogFitness.BL.Model
 {
+    [Serializable]
     public class User
     {
         public string Name { get; }
-        public Gender Gender { get; }
-        public DateTime BirthDate { get; }
+        public Gender Gender { get; set; }
+        public DateTime BirthDate { get; set; }
         public double Weight { get; set; }
 
         public int Height { get; set; }
+        public bool IsNewUser { get; } = false;
 
+        public int Age { get { return DateTime.Now.Year - BirthDate.Year; } }
         public User(string NAME, Gender GENDER, DateTime BIRTHDATE, double WEIGHT, int HEIGHT)
         {
             if (string.IsNullOrEmpty(NAME))
@@ -51,9 +54,18 @@ namespace CodeBlogFitness.BL.Model
             Weight = WEIGHT;
         }
 
+        public User(string NAME)
+        {
+            if (string.IsNullOrEmpty(NAME))
+            {
+                throw new ArgumentNullException("Name is incorrect");
+            }
+            this.Name = NAME;
+        }
+
         public override string ToString()
         {
-            return $"{Name} - {Gender.Name}";
+            return $"{Name} - {Age}";
         }
 
     }
