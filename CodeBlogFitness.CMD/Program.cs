@@ -13,6 +13,7 @@ namespace CodeBlogFitness.CMD
             var name = Console.ReadLine();
 
             var userController = new UserController(name);
+            var EC = new EatingController(userController.CurrentUser);
             if (userController.IsNewUser)
             {
                 Console.WriteLine("Set your gender (M or W)");
@@ -30,6 +31,61 @@ namespace CodeBlogFitness.CMD
 
             }
             Console.WriteLine(userController.CurrentUser);
+
+            Console.WriteLine("What do you want to do?");
+            Console.WriteLine("E - Set eating");
+            while (true)
+            {
+                var key = Console.ReadKey();
+                if (key.Key == ConsoleKey.E)
+                {
+                    var food = EnterEating();
+                    EC.Add(food.Food, food.Weight);
+                    foreach(var item in EC.Eating.Foods)
+                    {
+                        Console.WriteLine($"{item.Key} - {item.Value}");
+                    }
+                    break;
+                } else if (key.Key == ConsoleKey.Escape) {
+                    break;
+                }
+            }
+
+
+
+
+        }
+
+        private static (Food Food, double Weight) EnterEating()
+        {
+            Console.WriteLine("Set product name: ");
+            var food = Console.ReadLine();
+
+            var weight = ParseDouble("weight of food");
+
+            var calories = ParseDouble("the calories content");
+            var prot = ParseDouble("proteins content");
+            var fats = ParseDouble("fat content");
+            var carbs = ParseDouble("carbrohydrates content");
+            var product = new Food(food, calories, prot,fats,carbs);
+
+            return (Food: product, Weight: weight);
+        }
+
+        private static double ParseDouble(string Name)
+        {
+            while (true)
+            {
+                Console.Write($"Set {Name}: ");
+                if (double.TryParse(Console.ReadLine(), out double value))
+                {
+                    return value;
+                } else
+                {
+                    Console.WriteLine("Incorrect formate");
+                }
+            }
+
         }
     }
 }
