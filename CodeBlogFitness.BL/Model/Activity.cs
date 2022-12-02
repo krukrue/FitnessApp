@@ -7,19 +7,17 @@ using System.Threading.Tasks;
 namespace CodeBlogFitness.BL.Model
 {
     [Serializable]
-    public class Gender
+    public class Activity
     {
         public int ID { get; set; }
 
         public string Name { get; set; }
-        public Gender (string NAME)
+
+        public double CaloriesPerMin { get; set; }
+        public Activity(string name, double caloriespermin)
         {
-
-            if (NAME.ToUpper() != "M" && NAME.ToUpper() != "F"){
-                throw new ArgumentNullException("Gender can be M or F");
-            }
-            Name = NAME;
-
+            Name = name;
+            CaloriesPerMin = caloriespermin;
         }
 
         public override string ToString()

@@ -10,6 +10,8 @@ namespace CodeBlogFitness.BL.Model
 
     public class Eating
     {
+        public int ID { get; set; }
+
         public DateTime Moment { get; }
         public Dictionary <Food, double>? Foods { get; set; }
 

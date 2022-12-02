@@ -1,6 +1,7 @@
 ﻿using CodeBlogFitness.BL;
 using CodeBlogFitness.BL.Controller;
 using CodeBlogFitness.BL.Model;
+using System.Data;
 
 namespace CodeBlogFitness.CMD
 {
@@ -8,12 +9,26 @@ namespace CodeBlogFitness.CMD
     {
         static void Main(string[] args)
         {
+            UserTableDataGateway ut = new();
+            var result = ut.Load();
+            var customers = new List<User>();
+            Console.WriteLine("Here");
+            foreach (DataRow row in result.Rows)
+            {
+                customers.Add(new User(row["Name"].ToString() ?? "", new Gender(row["Gender"].ToString()), DateTime.Parse(row["BirthDay"].ToString()),
+                    Convert.ToDouble(row["Weight"]), Convert.ToInt32(row["Height"])));
+                Console.WriteLine(customers[0].Name);
+            }
             Console.WriteLine("Fitness Aplication v.0.01");
             Console.WriteLine("Set user name");
             var name = Console.ReadLine();
 
+
+
+
             var userController = new UserController(name);
             var EC = new EatingController(userController.CurrentUser);
+            var EXC = new ExerciseController(userController.CurrentUser); 
             if (userController.IsNewUser)
             {
                 Console.WriteLine("Set your gender (M or W)");
@@ -33,7 +48,10 @@ namespace CodeBlogFitness.CMD
             Console.WriteLine(userController.CurrentUser);
 
             Console.WriteLine("What do you want to do?");
-            Console.WriteLine("E - Set eating");
+            Console.WriteLine("E - Add eating");
+            Console.WriteLine("R - Add Exercise");
+            Console.WriteLine("Esc - Exit");
+
             while (true)
             {
                 var key = Console.ReadKey();
@@ -47,12 +65,35 @@ namespace CodeBlogFitness.CMD
                     }
                     break;
                 } else if (key.Key == ConsoleKey.Escape) {
-                    break;
+                    Environment.Exit(0);
+                } else if (key.Key == ConsoleKey.R)
+                {
+                    var activity = EnterExercise();
+                    EXC.Add(activity.activity, activity.begin, activity.end);
+                    foreach (var item in EXC.exerciseList)
+                    {
+                        Console.WriteLine($"{item.Activity} - {item.Start.ToShortTimeString()} until {item.End.ToShortTimeString()}");
+                    }
                 }
             }
 
 
 
+
+        }
+
+        private static (DateTime begin, DateTime end, Activity activity)  EnterExercise()
+        {
+            Console.WriteLine("Set exercise name");
+            var name = Console.ReadLine();
+            var energy = ParseDouble("energy per minute");
+
+            Console.WriteLine("Set start time");
+            DateTime.TryParse(Console.ReadLine(), out DateTime begin);
+            Console.WriteLine("Set end time");
+            DateTime.TryParse(Console.ReadLine(), out DateTime end);
+            Activity activity = new Activity(name, energy);
+            return (begin, end, activity);
 
         }
 

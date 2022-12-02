@@ -9,6 +9,8 @@ namespace CodeBlogFitness.BL.Model
     [Serializable]
     public class User
     {
+        public int ID { get; set; }
+
         public string Name { get; }
         public Gender Gender { get; set; }
         public DateTime BirthDate { get; set; }
