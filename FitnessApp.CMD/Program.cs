@@ -5,7 +5,7 @@ using System.Data;
 using System.Data.Entity;
 
 
-namespace CodeBlogFitness.CMD
+namespace FitnessApp.CMD
 {
     class Program
     {
@@ -65,7 +65,9 @@ namespace CodeBlogFitness.CMD
                     foreach (var item in EXC.exerciseList)
                     {
                         Console.WriteLine($"{item.Activity} - {item.Start.ToShortTimeString()} until {item.End.ToShortTimeString()}");
+                        
                     }
+                    break;
                 }
             }
 

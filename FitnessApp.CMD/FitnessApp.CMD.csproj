@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CodeBlogFitness.BL\FitnessApp.BL.csproj" />
+    <ProjectReference Include="..\FitnessApp.BL\FitnessApp.BL.csproj" />
   </ItemGroup>
 
 </Project>

@@ -29,7 +29,6 @@ namespace FitnessApp.BL.Controller
                 CurrentUser = new User(UserName);
                 Users.Add(CurrentUser);
                 IsNewUser = true;
-                Save();
             }
 
         }
@@ -51,15 +50,7 @@ namespace FitnessApp.BL.Controller
             CurrentUser.BirthDate = birth;
             CurrentUser.Weight = weight;
             CurrentUser.Height = height;
-        }
-        public static SqlConnectionStringBuilder GetBuilder()
-        {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = @"dbsys.cs.vsb.cz\STUDENT";   
-            builder.UserID = "kva0081";             
-            builder.Password = "doBxrNSZ2pXJQA3z";      
-            builder.InitialCatalog = "kva0081";
-            return builder;
+            Save();
         }
 
     }

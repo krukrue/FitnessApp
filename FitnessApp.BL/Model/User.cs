@@ -13,7 +13,7 @@ namespace FitnessApp.BL.Model
 
         public string Name { get; set;  }
         public Gender Gender { get; set; }
-        public DateTime BirthDate { get; set; }
+        public DateTime BirthDate { get; set; } = DateTime.Now;
         public double Weight { get; set; }
 
         public int Height { get; set; }
@@ -65,6 +65,10 @@ namespace FitnessApp.BL.Model
             this.Name = NAME;
         }
 
+        User()
+        {
+
+        }
         public override string ToString()
         {
             return $"{Name} - {Age}";

@@ -20,6 +20,7 @@ namespace FitnessApp.BL.Model
             CaloriesPerMin = caloriespermin;
         }
 
+        public Activity() { }
         public override string ToString()
         {
             return Name;

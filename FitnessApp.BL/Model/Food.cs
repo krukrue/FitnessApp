@@ -31,7 +31,7 @@ namespace FitnessApp.BL.Model
             Carbrohydrates=carbrohydrates/ 100;
             Calorie=calorie / 100;
         }
-
+        public Food() { }
         public override string ToString()
         {
             return Name;

@@ -15,13 +15,13 @@ namespace FitnessApp.BL.Model
         public Gender (string NAME)
         {
 
-            if (NAME.ToUpper() != "M" && NAME.ToUpper() != "F"){
+            if (NAME.ToUpper() != "M" && NAME.ToUpper() != "W"){
                 throw new ArgumentNullException("Gender can be M or F");
             }
             Name = NAME;
 
         }
-
+        public Gender() { }
         public override string ToString()
         {
             return Name;

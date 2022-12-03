@@ -29,6 +29,10 @@ namespace FitnessApp.BL.Controller
 
         public void Add(Food food, double weight)
         {
+            foreach(var a in Foods)
+            {
+                Console.WriteLine(a.Name);
+            }
             var product = Foods.SingleOrDefault(f => f.Name == food.Name);
             if (product == null)
             {

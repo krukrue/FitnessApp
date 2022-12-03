@@ -13,7 +13,7 @@ namespace FitnessApp.BL.Model
         public int ID { get; set; }
 
         public DateTime Moment { get; }
-        public Dictionary <Food, double>? Foods { get; set; }
+        public Dictionary <Food, double>? Foods { get; set; } = new Dictionary<Food, double>();
         
         public int UserID { get; set; }
         public virtual User? User { get; set; }
@@ -22,10 +22,13 @@ namespace FitnessApp.BL.Model
             Moment = DateTime.Now;
             Foods = new Dictionary <Food, double>();
         }
+        public Eating()
+        {
 
+        }
         public void Add(Food food, double weight) {
-
-            var product = Foods.Keys.FirstOrDefault(x => x.Name.Equals(food.Name));
+            Console.WriteLine(food.Name);
+            var product = Foods?.Keys.FirstOrDefault(f => f.Name.Equals(food.Name));
             if (product == null)
             {
                 Foods.Add(food, weight);

@@ -17,6 +17,7 @@ namespace FitnessApp.BL.Model
         public Activity Activity { get; set; }
         public virtual User User { get; set; }
 
+        public Exercise() { }
         public Exercise(DateTime start, DateTime end, Activity activity, User user)
         {
             Start = start;
