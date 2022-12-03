@@ -1,7 +1,9 @@
-﻿using CodeBlogFitness.BL;
-using CodeBlogFitness.BL.Controller;
-using CodeBlogFitness.BL.Model;
+﻿using FitnessApp.BL;
+using FitnessApp.BL.Controller;
+using FitnessApp.BL.Model;
 using System.Data;
+using System.Data.Entity;
+
 
 namespace CodeBlogFitness.CMD
 {
@@ -9,20 +11,10 @@ namespace CodeBlogFitness.CMD
     {
         static void Main(string[] args)
         {
-            UserTableDataGateway ut = new();
-            var result = ut.Load();
-            var customers = new List<User>();
-            Console.WriteLine("Here");
-            foreach (DataRow row in result.Rows)
-            {
-                customers.Add(new User(row["Name"].ToString() ?? "", new Gender(row["Gender"].ToString()), DateTime.Parse(row["BirthDay"].ToString()),
-                    Convert.ToDouble(row["Weight"]), Convert.ToInt32(row["Height"])));
-                Console.WriteLine(customers[0].Name);
-            }
+
             Console.WriteLine("Fitness Aplication v.0.01");
             Console.WriteLine("Set user name");
             var name = Console.ReadLine();
-
 
 
 

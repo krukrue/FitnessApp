@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CodeBlogFitness.BL.Model;
+using FitnessApp.BL.Model;
 
-namespace CodeBlogFitness.BL.Controller
+namespace FitnessApp.BL.Controller
 {
     public class ExerciseController : ControllerBase
     {
@@ -20,24 +20,25 @@ namespace CodeBlogFitness.BL.Controller
             this.user = user ?? throw new ArgumentNullException("Incorrect user data");
 
             exerciseList = GetAllExercises();
-            activityList= GetAllActivity();
+            activityList= GetAllActivities();
         }
 
-        private List<Exercise>? GetAllExercises()
+        private List<Exercise> GetAllExercises()
         {
-            return Load<List<Exercise>>(Exercises_FILE_NAME) ?? new List<Exercise>(); 
-        }
-
-        private List<Activity>? GetAllActivity()
-        {
-            return Load<List<Activity>>(Activity_FILE_NAME) ?? new List<Activity>();
+            return Load<Exercise>() ?? new List<Exercise>();
         }
 
         private void Save()
         {
-            Save(Exercises_FILE_NAME, exerciseList);
-            Save(Activity_FILE_NAME, activityList);
+            Save(exerciseList);
+            Save(activityList);
         }
+
+        private List<Activity> GetAllActivities()
+        {
+            return Load<Activity>() ?? new List<Activity>();
+        }
+
 
         public void Add(Activity activity, DateTime begin, DateTime end)
         {

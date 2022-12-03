@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeBlogFitness.BL.Model
+namespace FitnessApp.BL.Model
 {
     [Serializable]
 
@@ -14,8 +14,9 @@ namespace CodeBlogFitness.BL.Model
 
         public DateTime Moment { get; }
         public Dictionary <Food, double>? Foods { get; set; }
-
-        public User? User { get; set; }
+        
+        public int UserID { get; set; }
+        public virtual User? User { get; set; }
         public Eating(User user) { 
             User = user ?? throw new ArgumentNullException("User can't be empty");
             Moment = DateTime.Now;

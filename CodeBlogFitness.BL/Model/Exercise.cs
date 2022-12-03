@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeBlogFitness.BL.Model
+namespace FitnessApp.BL.Model
 {
     [Serializable]
     public class Exercise
     {
         public int ID { get; set; }
+        public int UserID { get; set; }
 
-        public DateTime Start { get;}
-        public DateTime End { get;}
-        public Activity Activity { get; }
-        public User User { get;  }
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
+        public Activity Activity { get; set; }
+        public virtual User User { get; set; }
 
         public Exercise(DateTime start, DateTime end, Activity activity, User user)
         {

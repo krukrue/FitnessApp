@@ -8,13 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.1" />
     <PackageReference Include="runtime.native.System.Data.SqlClient.sni" Version="4.7.0" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CodeBlogFitness.BL\CodeBlogFitness.BL.csproj" />
+    <ProjectReference Include="..\CodeBlogFitness.BL\FitnessApp.BL.csproj" />
   </ItemGroup>
 
 </Project>

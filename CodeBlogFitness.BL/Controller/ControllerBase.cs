@@ -5,20 +5,20 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeBlogFitness.BL.Controller
+namespace FitnessApp.BL.Controller
 {
     public abstract class ControllerBase
     {
-        public IDataSave saver = new SarializeData();
+        private readonly IDataSave manager = new DatabaseSaver();
 
-        public void Save(string fileName, object item)
+        protected void Save<T>(List<T> item) where T : class
         {
-            saver.save(fileName, item);
+            manager.Save(item);
         }
 
-        public T Load<T>(string fileName)
+        protected List<T> Load<T>() where T : class
         {
-            return saver.Load<T>(fileName);
+            return manager.Load<T>();
         }
     }
 }

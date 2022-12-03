@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeBlogFitness.BL.Model
+namespace FitnessApp.BL.Model
 {
     [Serializable]
     public class User
     {
         public int ID { get; set; }
 
-        public string Name { get; }
+        public string Name { get; set;  }
         public Gender Gender { get; set; }
         public DateTime BirthDate { get; set; }
         public double Weight { get; set; }

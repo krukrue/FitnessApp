@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeBlogFitness.BL.Model
+namespace FitnessApp.BL.Model
 {
     [Serializable]
     public class Gender

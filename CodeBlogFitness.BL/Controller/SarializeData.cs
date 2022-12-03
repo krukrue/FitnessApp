@@ -5,32 +5,35 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeBlogFitness.BL.Controller
+namespace FitnessApp.BL.Controller
 {
     public class SarializeData : IDataSave
     {
 
 
-        public T Load<T>(string FileName)
+        public List<T> Load<T>() where T : class
         {
             var formatter = new BinaryFormatter();
+            var FileName = typeof(T)+".dat";
 
             using (var fs = new FileStream(FileName, FileMode.OpenOrCreate))
             {
-                if (fs.Length > 0 && formatter.Deserialize(fs) is T items)
+                if (fs.Length > 0 && formatter.Deserialize(fs) is List<T> items)
                 {
                     return items;
                 }
                 else
                 {
-                    return default(T);
+                    return new List<T>();
                 }
             }
         }
 
-        public void save(string FileName, object item)
+        public void Save<T>(List<T> item) where T : class
         {
             var formatter = new BinaryFormatter();
+            var FileName = typeof(T)+".dat";
+
 
             using (var fs = new FileStream(FileName, FileMode.OpenOrCreate))
             {

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
-using CodeBlogFitness.BL.Model;
+using FitnessApp.BL.Model;
 
-namespace CodeBlogFitness.BL.Controller 
+namespace FitnessApp.BL.Controller 
 {
     [Serializable]
     public class EatingController : ControllerBase
@@ -44,18 +44,18 @@ namespace CodeBlogFitness.BL.Controller
 
         private Eating GetEating()
         {
-            return Load<Eating>(EATINGS_FILE_NAME) ?? new Eating(user);
+            return Load<Eating>().FirstOrDefault() ?? new Eating(user);
         }
 
         private List<Food> GetAllFoods()
         {
-            return Load<List<Food>>(FOODS_FILE_NAME) ?? new List<Food>();
+            return Load<Food>() ?? new List<Food>();
         }
 
         private void Save()
         {
-            Save(FOODS_FILE_NAME, Foods);
-            Save(EATINGS_FILE_NAME, Eating);
+            Save(Foods);
+            Save(new List<Eating>() { Eating });
         }
 
 

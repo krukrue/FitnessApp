@@ -1,4 +1,4 @@
-﻿using CodeBlogFitness.BL.Model;
+﻿using FitnessApp.BL.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 
 
-namespace CodeBlogFitness.BL.Controller
+namespace FitnessApp.BL.Controller
 {
-    public class UserController
+    public class UserController : ControllerBase
     {
         public List<User> Users;
         public User CurrentUser { get; }
@@ -35,30 +35,15 @@ namespace CodeBlogFitness.BL.Controller
         }
         public void Save()
         {
-            var formatter = new BinaryFormatter();
-            using (var fs = new FileStream("users.dat", FileMode.OpenOrCreate))
-            {
-                formatter.Serialize(fs, Users); 
-            }
+            Save(Users);
         }
 
-        public List<User> GetUsersData()
+        private List<User> GetUsersData()
         {
-            var formatter = new BinaryFormatter();
-            using (var fs = new FileStream("users.dat", FileMode.OpenOrCreate))
-            {
-                if(formatter.Deserialize(fs) is List<User> users)
-                {
-                    
-                    return users;
-                }
-                else
-                {
-                    return new List<User>();
-                }
-
-            }
+            return Load<User>() ?? new List<User>();
         }
+
+
 
         public void setNewUserData(string gender, DateTime birth, double weight = 1, int height = 1)
         {

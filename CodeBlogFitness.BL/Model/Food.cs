@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeBlogFitness.BL.Model
+namespace FitnessApp.BL.Model
 {
     [Serializable]
     public class Food
     {
         public int ID { get; set; }
 
-        public string? Name { get;  }
-        public double Proteins { get; }
-        public double Fats { get;  }
-        public double Carbrohydrates { get; }
-        public double Calorie { get; }
+        public string? Name { get; set; }
+        public double Proteins { get; set; }
+        public double Fats { get; set; }
+        public double Carbrohydrates { get; set; }
+        public double Calorie { get; set; }
 
 
         public Food(string NAME) : this (NAME, 0 , 0 , 0, 0)

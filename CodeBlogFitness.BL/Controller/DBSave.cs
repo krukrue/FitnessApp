@@ -1,22 +1,31 @@
-﻿using System;
+﻿using FitnessApp.BL.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeBlogFitness.BL.Controller
+namespace FitnessApp.BL.Controller
 {
-    public class DBSave //: IDataSave
+    public class DatabaseSaver : IDataSave
     {
-        //public T Load<T>(string FileName)
-        //{
-
-        //}
-
-        public void save(string FileName, object item)
+        public List<T> Load<T>() where T : class
         {
-            
+            using (var db = new FitnessDataGateWay())
+            {
+                var result = db.Set<T>().Where(t => true).ToList();
+                return result;
+            }
+        }
+
+        public void Save<T>(List<T> item) where T : class
+        {
+            using (var db = new FitnessDataGateWay())
+            {
+                db.Set<T>().AddRange(item);
+                db.SaveChanges();
+            }
         }
     }
 }
