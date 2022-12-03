@@ -19,6 +19,7 @@ namespace FitnessApp.BL.Controller
         public Eating Eating { get; }
 
 
+
         public EatingController(User user)
         {
             this.user = user ?? throw new ArgumentNullException("Cannot be empty.");
