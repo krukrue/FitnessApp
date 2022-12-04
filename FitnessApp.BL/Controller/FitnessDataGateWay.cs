@@ -6,7 +6,7 @@ namespace FitnessApp.BL.Controller
 {
     public class FitnessDataGateWay : DbContext
     {
-        public FitnessDataGateWay( ) : base("DbConnection")
+        public FitnessDataGateWay( ) : base("DBFitnessApplication")
         { 
         }
 

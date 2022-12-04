@@ -17,7 +17,7 @@ namespace FitnessApp.BL.Model
         public double Carbrohydrates { get; set; }
         public double Calorie { get; set; }
 
-
+        public int EatingID { get; set; }
         public Food(string NAME) : this (NAME, 0 , 0 , 0, 0)
         {
             Name = NAME;

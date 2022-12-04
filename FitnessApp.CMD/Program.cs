@@ -4,7 +4,6 @@ using FitnessApp.BL.Model;
 using System.Data;
 using System.Data.Entity;
 
-
 namespace FitnessApp.CMD
 {
     class Program
@@ -39,23 +38,25 @@ namespace FitnessApp.CMD
             }
             Console.WriteLine(userController.CurrentUser);
 
-            Console.WriteLine("What do you want to do?");
-            Console.WriteLine("E - Add eating");
-            Console.WriteLine("R - Add Exercise");
-            Console.WriteLine("Esc - Exit");
-
             while (true)
             {
+                Console.WriteLine("What do you want to do?");
+                Console.WriteLine("E - Add eating");
+                Console.WriteLine("R - Add Exercise");
+                Console.WriteLine("T - show my exercises");
+                Console.WriteLine("T - show my eatings");
+
+                Console.WriteLine("Esc - Exit");
                 var key = Console.ReadKey();
                 if (key.Key == ConsoleKey.E)
                 {
                     var food = EnterEating();
+                    food.Food.EatingID = EC.Eating.ID;
                     EC.Add(food.Food, food.Weight);
                     foreach(var item in EC.Eating.Foods)
                     {
                         Console.WriteLine($"{item.Key} - {item.Value}");
                     }
-                    break;
                 } else if (key.Key == ConsoleKey.Escape) {
                     Environment.Exit(0);
                 } else if (key.Key == ConsoleKey.R)
@@ -67,7 +68,6 @@ namespace FitnessApp.CMD
                         Console.WriteLine($"{item.Activity} - {item.Start.ToShortTimeString()} until {item.End.ToShortTimeString()}");
                         
                     }
-                    break;
                 }
             }
 

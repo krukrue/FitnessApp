@@ -29,21 +29,21 @@ namespace FitnessApp.BL.Controller
 
         public void Add(Food food, double weight)
         {
-            foreach(var a in Foods)
-            {
-                Console.WriteLine(a.Name);
-            }
             var product = Foods.SingleOrDefault(f => f.Name == food.Name);
             if (product == null)
             {
                 Foods.Add(food);
                 Eating.Add(food, weight);
-                Save();
+                food.EatingID = Eating.ID;
+                Save(product);
+                Save(food);
+
             }
             else
             {
                 Eating.Add(product, weight);
-                Save();
+                Save(product);
+
             }
         }
 
@@ -57,11 +57,7 @@ namespace FitnessApp.BL.Controller
             return Load<Food>() ?? new List<Food>();
         }
 
-        private void Save()
-        {
-            Save(Foods);
-            Save(new List<Eating>() { Eating });
-        }
+
 
 
 

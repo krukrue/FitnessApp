@@ -9,16 +9,16 @@ namespace FitnessApp.BL.Controller
 {
     public abstract class ControllerBase
     {
-        private readonly IDataSave manager = new DatabaseSaver();
+        private readonly IDataSave db = new DatabaseSaver();
 
-        protected void Save<T>(List<T> item) where T : class
+        protected void Save<T>(T item) where T : class
         {
-            manager.Save(item);
+            db.Save(item);
         }
 
         protected List<T> Load<T>() where T : class
         {
-            return manager.Load<T>();
+            return db.Load<T>();
         }
     }
 }

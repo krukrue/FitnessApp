@@ -29,7 +29,7 @@ namespace FitnessApp.BL.Controller
             }
         }
 
-        public void Save<T>(List<T> item) where T : class
+        public void Save<T>(T item) where T : class
         {
             var formatter = new BinaryFormatter();
             var FileName = typeof(T)+".dat";

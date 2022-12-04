@@ -16,14 +16,15 @@ namespace FitnessApp.BL.Model
         public DateTime End { get; set; }
         public Activity Activity { get; set; }
         public virtual User User { get; set; }
+        public int ActivityId { get; set; }
 
         public Exercise() { }
-        public Exercise(DateTime start, DateTime end, Activity activity, User user)
+        public Exercise(DateTime start, DateTime end, Activity activity, int UserID)
         {
             Start = start;
             End = end;
             Activity = activity;
-            User = user;
+            this.UserID = UserID;
 
         }
     }

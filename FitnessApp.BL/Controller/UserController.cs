@@ -23,7 +23,7 @@ namespace FitnessApp.BL.Controller
             }
             Users = GetUsersData();
 
-            CurrentUser = Users.SingleOrDefault(u => u.Name == UserName);
+            CurrentUser = Users.FirstOrDefault(u => u.Name == UserName);
             if (CurrentUser == null)
             {
                 CurrentUser = new User(UserName);
@@ -32,10 +32,7 @@ namespace FitnessApp.BL.Controller
             }
 
         }
-        public void Save()
-        {
-            Save(Users);
-        }
+
 
         private List<User> GetUsersData()
         {
@@ -50,7 +47,7 @@ namespace FitnessApp.BL.Controller
             CurrentUser.BirthDate = birth;
             CurrentUser.Weight = weight;
             CurrentUser.Height = height;
-            Save();
+            Save(CurrentUser);
         }
 
     }

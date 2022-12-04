@@ -28,11 +28,7 @@ namespace FitnessApp.BL.Controller
             return Load<Exercise>() ?? new List<Exercise>();
         }
 
-        private void Save()
-        {
-            Save(exerciseList);
-            Save(activityList);
-        }
+
 
         private List<Activity> GetAllActivities()
         {
@@ -47,15 +43,17 @@ namespace FitnessApp.BL.Controller
             if (act == null)
             {
                 activityList.Add(activity);
-                var exercise = new Exercise(begin, end, activity, user);
+                var exercise = new Exercise(begin, end, activity, user.ID);
                 exerciseList.Add(exercise);
+                Save(exercise);
+
             }
             else
             {
-                var exercise = new Exercise(begin, end, activity, user);
+                var exercise = new Exercise(begin, end, activity, user.ID);
                 exerciseList.Add(exercise);
+                Save(exercise);
             }
-            Save();
         }
     }
 
