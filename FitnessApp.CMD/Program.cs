@@ -11,7 +11,7 @@ namespace FitnessApp.CMD
         static void Main(string[] args)
         {
 
-            Console.WriteLine("Fitness Aplication v.0.01");
+            Console.WriteLine("Fitness Aplication v.1.0");
             Console.WriteLine("Set user name");
             var name = Console.ReadLine();
 
@@ -22,18 +22,7 @@ namespace FitnessApp.CMD
             var EXC = new ExerciseController(userController.CurrentUser); 
             if (userController.IsNewUser)
             {
-                Console.WriteLine("Set your gender (M or W)");
-                var g =  Console.ReadLine();
-                Console.WriteLine("Set your birthday (dd.mm.yyyy)");
-                var b = Console.ReadLine();
-                DateTime.TryParse(b, out DateTime birth);
-                Console.WriteLine("Set your weight");
-                var W = Console.ReadLine();
-                double Weigth = double.Parse(W);
-                Console.WriteLine("Set your height");
-                var h = Console.ReadLine();
-                int height = int.Parse(h);
-                userController.setNewUserData(g,birth, Weigth, height);
+                SetNewUser(userController);
 
             }
             Console.WriteLine(userController.CurrentUser);
@@ -44,10 +33,12 @@ namespace FitnessApp.CMD
                 Console.WriteLine("E - Add eating");
                 Console.WriteLine("R - Add Exercise");
                 Console.WriteLine("T - show my exercises");
-                Console.WriteLine("T - show my eatings");
+                Console.WriteLine("Y - show my eatings");
+                Console.WriteLine("U - change profile data");
 
                 Console.WriteLine("Esc - Exit");
                 var key = Console.ReadKey();
+                Console.Write("\r" + new string(' ', Console.WindowWidth) + "\r");
                 if (key.Key == ConsoleKey.E)
                 {
                     var food = EnterEating();
@@ -66,8 +57,20 @@ namespace FitnessApp.CMD
                     foreach (var item in EXC.exerciseList)
                     {
                         Console.WriteLine($"{item.Activity} - {item.Start.ToShortTimeString()} until {item.End.ToShortTimeString()}");
-                        
+              
                     }
+                }
+                else if (key.Key == ConsoleKey.U)
+                {
+                    SetNewUser(userController);
+                }
+                else if (key.Key == ConsoleKey.T)
+                {
+                    EXC.showAllExercises();
+                }
+                else if (key.Key == ConsoleKey.Y)
+                {
+                    EC.showAllEatings();
                 }
             }
 
@@ -121,6 +124,21 @@ namespace FitnessApp.CMD
                 }
             }
 
+        }
+        private static void SetNewUser(UserController userController)
+        {
+            Console.WriteLine("Set your gender (M or W)");
+            var g = Console.ReadLine();
+            Console.WriteLine("Set your birthday (dd.mm.yyyy)");
+            var b = Console.ReadLine();
+            DateTime.TryParse(b, out DateTime birth);
+            Console.WriteLine("Set your weight");
+            var W = Console.ReadLine();
+            double Weigth = double.Parse(W);
+            Console.WriteLine("Set your height");
+            var h = Console.ReadLine();
+            int height = int.Parse(h);
+            userController.setNewUserData(g, birth, Weigth, height);
         }
     }
 }

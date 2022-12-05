@@ -1,6 +1,7 @@
 ﻿using FitnessApp.BL.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
@@ -23,7 +24,13 @@ namespace FitnessApp.BL.Controller
         {
             using (var db = new FitnessDataGateWay())
             {
-                db.Set<T>().Add(item);
+                if (item is User || item is Eating)
+                {
+                    db.Set<T>().AddOrUpdate(item);
+                } else
+                {
+                    db.Set<T>().Add(item);
+                }
                 db.SaveChanges();
             }
         }

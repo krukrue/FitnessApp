@@ -27,5 +27,7 @@ namespace FitnessApp.BL.Model
             this.UserID = UserID;
 
         }
+
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
@@ -16,7 +17,9 @@ namespace FitnessApp.BL.Controller
 
         private readonly User user;
         public List<Food> Foods { get; }
-        public Eating Eating { get; }
+        public Eating Eating { get; } 
+
+        public List <Eating> Eatings { get; } = new List<Eating>();
 
 
 
@@ -24,7 +27,10 @@ namespace FitnessApp.BL.Controller
         {
             this.user = user ?? throw new ArgumentNullException("Cannot be empty.");
             Foods = GetAllFoods();
-            Eating = GetEating();
+            Eatings = GetAllEating();
+            Eating = Eatings.FirstOrDefault(x => x.UserID == user.ID) ?? new Eating(user.ID);
+            Eating.UserID = user.ID;
+
         }
 
         public void Add(Food food, double weight)
@@ -34,22 +40,23 @@ namespace FitnessApp.BL.Controller
             {
                 Foods.Add(food);
                 Eating.Add(food, weight);
+                Console.WriteLine(Eating.ID);
                 food.EatingID = Eating.ID;
-                Save(product);
                 Save(food);
+                Save(Eating);
 
             }
             else
             {
                 Eating.Add(product, weight);
-                Save(product);
+                Save(Eating);
 
             }
         }
 
-        private Eating GetEating()
+        private List <Eating> GetAllEating()
         {
-            return Load<Eating>().FirstOrDefault() ?? new Eating(user);
+            return Load<Eating>();
         }
 
         private List<Food> GetAllFoods()
@@ -57,7 +64,26 @@ namespace FitnessApp.BL.Controller
             return Load<Food>() ?? new List<Food>();
         }
 
+        public void showAllEatings()
+        {
+            int count = 0;
+            double coloriesCount = 0;
+            foreach (var a in Foods)
+            {
+                if (Eating.ID == a.EatingID && Eating.UserID == user.ID)
+                {
+                    count++;
+                    coloriesCount += a.Calorie;
+                    Console.WriteLine($"Food: {a.Name} - Time of eating: {Eating.Moment.ToShortDateString()}") ;
+                }
+            }
+            Console.WriteLine($"{Math.Round(coloriesCount)} - calories");
 
+            if (count == 0)
+            {
+                Console.WriteLine("You haven't any eatings");
+            }
+        }
 
 
 

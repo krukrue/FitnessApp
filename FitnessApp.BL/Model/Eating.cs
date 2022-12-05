@@ -18,8 +18,8 @@ namespace FitnessApp.BL.Model
         public int UserID { get; set; }
         public virtual User? User { get; set; }
         public double Weight { get; set; } = 0;
-        public Eating(User user) { 
-            User = user ?? throw new ArgumentNullException("User can't be empty");
+        public Eating(int UserID) {
+            this.UserID = UserID;
             Moment = DateTime.Now;
             Foods = new Dictionary <Food, double>();
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FitnessApp.BL.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -20,5 +21,6 @@ namespace FitnessApp.BL.Controller
         {
             return db.Load<T>();
         }
+
     }
 }
